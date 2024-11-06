@@ -16,18 +16,28 @@
       "type": "string",
       "required": true
     },
-    "apellido": {
+    "apellidos": {
       "type": "string",
       "required": true
     },
-    "edad": {
-      "type": "integer",
+    "email": {
+      "type": "string",
       "required": true
     },
-    "grupoId": {
+    "genero": {
+      "type": "enumeration",
+      "enum": [
+        "male",
+        "female",
+        "other"
+      ],
+      "required": true
+    },
+    "grupo": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::grupo.grupo"
+      "relation": "manyToOne",
+      "target": "api::grupo.grupo",
+      "inversedBy": "personas"
     }
   }
 }
