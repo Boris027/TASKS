@@ -714,6 +714,7 @@ export interface ApiPersonaPersona extends Schema.CollectionType {
     singularName: 'persona';
     pluralName: 'personas';
     displayName: 'Personas';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -722,7 +723,11 @@ export interface ApiPersonaPersona extends Schema.CollectionType {
     nombre: Attribute.String & Attribute.Required;
     apellido: Attribute.String & Attribute.Required;
     edad: Attribute.Integer & Attribute.Required;
-    grupoId: Attribute.Integer;
+    grupoId: Attribute.Relation<
+      'api::persona.persona',
+      'oneToOne',
+      'api::grupo.grupo'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
