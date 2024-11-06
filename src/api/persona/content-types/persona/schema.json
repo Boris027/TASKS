@@ -38,6 +38,12 @@
       "relation": "manyToOne",
       "target": "api::grupo.grupo",
       "inversedBy": "personas"
+    },
+    "edad": {
+      "type": "integer",
+      "required": true,
+      "min": 0,
+      "default": 0
     }
   }
 }

@@ -420,6 +420,12 @@ export interface ApiPersonaPersona extends Schema.CollectionType {
       'manyToOne',
       'api::grupo.grupo'
     >;
+    edad: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
