@@ -362,88 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiGrupoGrupo extends Schema.CollectionType {
-  collectionName: 'grupos';
-  info: {
-    singularName: 'grupo';
-    pluralName: 'grupos';
-    displayName: 'Grupos';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nombre: Attribute.String & Attribute.Required;
-    personas: Attribute.Relation<
-      'api::grupo.grupo',
-      'oneToMany',
-      'api::persona.persona'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::grupo.grupo',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::grupo.grupo',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPersonaPersona extends Schema.CollectionType {
-  collectionName: 'personas';
-  info: {
-    singularName: 'persona';
-    pluralName: 'personas';
-    displayName: 'Personas';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nombre: Attribute.String & Attribute.Required;
-    apellidos: Attribute.String & Attribute.Required;
-    email: Attribute.String & Attribute.Required;
-    genero: Attribute.Enumeration<['male', 'female', 'other']> &
-      Attribute.Required;
-    grupo: Attribute.Relation<
-      'api::persona.persona',
-      'manyToOne',
-      'api::grupo.grupo'
-    >;
-    edad: Attribute.Integer &
-      Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 0;
-      }> &
-      Attribute.DefaultTo<0>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::persona.persona',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::persona.persona',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -713,7 +631,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -742,6 +659,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    favoritelists: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::favoritelist.favoritelist'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -759,6 +681,166 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCryptoCrypto extends Schema.CollectionType {
+  collectionName: 'cryptos';
+  info: {
+    singularName: 'crypto';
+    pluralName: 'cryptos';
+    displayName: 'Crypto';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    cryptoId: Attribute.String;
+    favoritelists: Attribute.Relation<
+      'api::crypto.crypto',
+      'oneToMany',
+      'api::favoritelist.favoritelist'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::crypto.crypto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::crypto.crypto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFavoritelistFavoritelist extends Schema.CollectionType {
+  collectionName: 'favoritelists';
+  info: {
+    singularName: 'favoritelist';
+    pluralName: 'favoritelists';
+    displayName: 'Favoritelist';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String;
+    Description: Attribute.Text;
+    crypto: Attribute.Relation<
+      'api::favoritelist.favoritelist',
+      'manyToOne',
+      'api::crypto.crypto'
+    >;
+    users_permissions_user: Attribute.Relation<
+      'api::favoritelist.favoritelist',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::favoritelist.favoritelist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::favoritelist.favoritelist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGrupoGrupo extends Schema.CollectionType {
+  collectionName: 'grupos';
+  info: {
+    singularName: 'grupo';
+    pluralName: 'grupos';
+    displayName: 'Grupos';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String & Attribute.Required;
+    personas: Attribute.Relation<
+      'api::grupo.grupo',
+      'oneToMany',
+      'api::persona.persona'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::grupo.grupo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::grupo.grupo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPersonaPersona extends Schema.CollectionType {
+  collectionName: 'personas';
+  info: {
+    singularName: 'persona';
+    pluralName: 'personas';
+    displayName: 'Personas';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String & Attribute.Required;
+    apellidos: Attribute.String & Attribute.Required;
+    email: Attribute.String & Attribute.Required;
+    genero: Attribute.Enumeration<['male', 'female', 'other']> &
+      Attribute.Required;
+    grupo: Attribute.Relation<
+      'api::persona.persona',
+      'manyToOne',
+      'api::grupo.grupo'
+    >;
+    edad: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }> &
+      Attribute.DefaultTo<0>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::persona.persona',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::persona.persona',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -769,14 +851,16 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::grupo.grupo': ApiGrupoGrupo;
-      'api::persona.persona': ApiPersonaPersona;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::crypto.crypto': ApiCryptoCrypto;
+      'api::favoritelist.favoritelist': ApiFavoritelistFavoritelist;
+      'api::grupo.grupo': ApiGrupoGrupo;
+      'api::persona.persona': ApiPersonaPersona;
     }
   }
 }

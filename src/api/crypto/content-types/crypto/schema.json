@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cryptos",
+  "info": {
+    "singularName": "crypto",
+    "pluralName": "cryptos",
+    "displayName": "Crypto",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cryptoId": {
+      "type": "string"
+    },
+    "favoritelists": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::favoritelist.favoritelist",
+      "mappedBy": "crypto"
+    }
+  }
+}
