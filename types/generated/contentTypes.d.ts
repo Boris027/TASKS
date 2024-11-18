@@ -694,11 +694,6 @@ export interface ApiCryptoCrypto extends Schema.CollectionType {
   };
   attributes: {
     cryptoId: Attribute.String;
-    favoritelists: Attribute.Relation<
-      'api::crypto.crypto',
-      'oneToMany',
-      'api::favoritelist.favoritelist'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -731,15 +726,15 @@ export interface ApiFavoritelistFavoritelist extends Schema.CollectionType {
   attributes: {
     Title: Attribute.String;
     Description: Attribute.Text;
-    crypto: Attribute.Relation<
-      'api::favoritelist.favoritelist',
-      'manyToOne',
-      'api::crypto.crypto'
-    >;
     users_permissions_user: Attribute.Relation<
       'api::favoritelist.favoritelist',
       'manyToOne',
       'plugin::users-permissions.user'
+    >;
+    cryptos: Attribute.Relation<
+      'api::favoritelist.favoritelist',
+      'oneToMany',
+      'api::crypto.crypto'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

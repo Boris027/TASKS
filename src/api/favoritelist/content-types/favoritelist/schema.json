@@ -18,17 +18,16 @@
     "Description": {
       "type": "text"
     },
-    "crypto": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::crypto.crypto",
-      "inversedBy": "favoritelists"
-    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "favoritelists"
+    },
+    "cryptos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::crypto.crypto"
     }
   }
 }

@@ -14,12 +14,6 @@
   "attributes": {
     "cryptoId": {
       "type": "string"
-    },
-    "favoritelists": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::favoritelist.favoritelist",
-      "mappedBy": "crypto"
     }
   }
 }
