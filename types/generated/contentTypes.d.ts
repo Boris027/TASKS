@@ -694,6 +694,7 @@ export interface ApiCryptoCrypto extends Schema.CollectionType {
   };
   attributes: {
     cryptoId: Attribute.String;
+    Name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
