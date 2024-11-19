@@ -17,6 +17,9 @@
     },
     "Name": {
       "type": "string"
+    },
+    "symbol": {
+      "type": "string"
     }
   }
 }
