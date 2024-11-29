@@ -70,6 +70,13 @@
       "relation": "oneToMany",
       "target": "api::favoritelist.favoritelist",
       "mappedBy": "users_permissions_user"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
