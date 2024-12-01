@@ -665,6 +665,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::favoritelist.favoritelist'
     >;
     image: Attribute.Media;
+    gender: Attribute.Enumeration<['male', 'female', 'other']>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
